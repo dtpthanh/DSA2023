@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class Bai2 {
     public static int binarySearch(int[] a, int number, int m, int n) {
+        Arrays.sort(a); //Sap xep mang
         if(n >= m) {
             int mid = m + (n-m) / 2;
             if (a[mid] == number) return mid;
@@ -23,7 +24,6 @@ public class Bai2 {
         }
         System.out.println("Nhap so nguyen can tim: ");
         int number = input.nextInt();
-        Arrays.sort(a); //Sap xep mang
         System.out.println("Chi so phan tu can tim: ");
         System.out.print(binarySearch(a,number, 0, n));
     }
