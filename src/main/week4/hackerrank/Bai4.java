@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
-public class Bai9 {
+public class Bai4 {
 
     static class SinglyLinkedListNode {
         public int data;
@@ -52,53 +52,55 @@ public class Bai9 {
         }
     }
 
-    // Complete the mergeLists function below.
+    class Result {
 
-    /*
-     * For your reference:
-     *
-     * SinglyLinkedListNode {
-     *     int data;
-     *     SinglyLinkedListNode next;
-     * }
-     *
-     */
-    static SinglyLinkedListNode mergeLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
-        if (head1 == null) {
-            return head2;
-        }
-        if (head2 == null) {
-            return head1;
-        }
-        SinglyLinkedListNode mergedHead;
-        if (head1.data < head2.data) {
-            mergedHead = head1;
-            head1 = head1.next;
-        } else {
-            mergedHead = head2;
-            head2 = head2.next;
-        }
-        SinglyLinkedListNode current = mergedHead;
-        while (head1 != null && head2 != null) {
-            if (head1.data < head2.data) {
-                current.next = head1;
-                head1 = head1.next;
-            } else {
-                current.next = head2;
-                head2 = head2.next;
+        /*
+         * Complete the 'insertNodeAtPosition' function below.
+         *
+         * The function is expected to return an INTEGER_SINGLY_LINKED_LIST.
+         * The function accepts following parameters:
+         *  1. INTEGER_SINGLY_LINKED_LIST llist
+         *  2. INTEGER data
+         *  3. INTEGER position
+         */
+
+        /*
+         * For your reference:
+         *
+         * SinglyLinkedListNode {
+         *     int data;
+         *     SinglyLinkedListNode next;
+         * }
+         *
+         */
+
+        public SinglyLinkedListNode insertNodeAtPosition(SinglyLinkedListNode llist, int data, int position) {
+            SinglyLinkedListNode node = new SinglyLinkedListNode(data);
+            node.next = null;
+            if(llist == null){
+                return node;
             }
-            current = current.next;
+            else if(position == 0){
+                node.next = llist;
+                return node;
+            }
+            SinglyLinkedListNode current = llist;
+            for (int i = 0; i < position - 1; i++) {
+                if (current.next != null) {
+                    current = current.next;
+                } else {
+                    break;
+                }
+            }
+            node.next = current.next;
+            current.next = node;
+            return llist;
         }
-        if (head1 != null) {
-            current.next = head1;
-        } else {
-            current.next = head2;
-        }
-        return mergedHead;
+
     }
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
     }
 }
