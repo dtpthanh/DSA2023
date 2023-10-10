@@ -1,11 +1,7 @@
-
-import java.io.BufferedWriter;
-import java.io.FileWriter.*;
-import java.io.IOException;
-import java.io.FileOutputStream.*;
+import java.io.*;
 import java.util.*;
 
-public class Bai2 {
+public class Bai8 {
 
     static class SinglyLinkedListNode {
         public int data;
@@ -19,11 +15,24 @@ public class Bai2 {
 
     static class SinglyLinkedList {
         public SinglyLinkedListNode head;
+        public SinglyLinkedListNode tail;
 
         public SinglyLinkedList() {
             this.head = null;
+            this.tail = null;
         }
 
+        public void insertNode(int nodeData) {
+            SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
+
+            if (this.head == null) {
+                this.head = node;
+            } else {
+                this.tail.next = node;
+            }
+
+            this.tail = node;
+        }
     }
 
     public static void printSinglyLinkedList(SinglyLinkedListNode node, String sep, BufferedWriter bufferedWriter) throws IOException {
@@ -38,7 +47,7 @@ public class Bai2 {
         }
     }
 
-    // Complete the insertNodeAtTail function below.
+    // Complete the compareLists function below.
 
     /*
      * For your reference:
@@ -49,8 +58,19 @@ public class Bai2 {
      * }
      *
      */
-    static SinglyLinkedListNode insertNodeAtTail(SinglyLinkedListNode head, int data) {
-        return head.next = new SinglyLinkedListNode(data);
+    static boolean compareLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
+        while (head1 != null && head2 != null) {
+            if (head1.data != head2.data) {
+                return false;
+            }
+
+            head1 = head1.next;
+            head2 = head2.next;
+        }
+        if (head1 != null || head2 != null) {
+            return false;
+        }
+        return true;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
