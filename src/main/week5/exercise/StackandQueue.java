@@ -10,7 +10,7 @@ public class StackandQueue {
     public boolean isEmpty() {
       return first==null;
     }
-    public void push(String item) {
+    public void push (String item) {
       Node old = first;
       first = new Node();
       first.item = item;
@@ -26,19 +26,20 @@ public class StackandQueue {
       return result;
     }
 
-
     public static class Queue{
       private Node first, last;
       public boolean isEmpty() {
         return first==null;
       }
       public void enqueue(String item) {
-        Node oldLast = last;
+        Node oldNode = last;
         last = new Node();
         last.item = item;
         last.next = null;
         if (isEmpty()) first = last;
-        else oldLast.next = last;
+        else {
+          oldNode.next = last;
+        }
       }
       public String dequeue() {
         String result = first.item;
@@ -83,8 +84,9 @@ public class StackandQueue {
       q1.enqueue("A");
       q1.enqueue("B");
       q1.enqueue("C");
-      while (!q1.isEmpty())
+      while (!q1.isEmpty()) {
         System.out.println(q1.dequeue());
+      }
     }
   }
 }
