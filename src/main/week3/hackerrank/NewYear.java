@@ -4,7 +4,10 @@ import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-class Result {
+
+
+public class NewYear {
+    class Result {
 
     /*
      * Complete the 'minimumBribes' function below.
@@ -33,8 +36,6 @@ class Result {
         }
     }
 }
-
-public class NewYear {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
