@@ -5,7 +5,7 @@ import java.util.Set;
 public class Pairs {
   public static int pairs(int[] arr, int n, int k) {
     int count = 0;
-    //
+    //Bảng băm HashSet.
     Set<Integer> values = new HashSet<>();
 
     for (int i = 0; i < n; i++) {

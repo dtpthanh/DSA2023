@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 public class MissingNumber2 {
   class Result {
 
-    public static List<Integer> missingNumbers(List<Integer> arr, List<Integer> brr) {
+    public List<Integer> missingNumbers(List<Integer> arr, List<Integer> brr) {
       //Sorting. Độ phức tạp O(n * log(n) + m * log(m)).
       Collections.sort(arr);
       Collections.sort(brr);
@@ -25,7 +25,9 @@ public class MissingNumber2 {
           i++;
           j++;
         } else {
-          result.add(brr.get(j));
+          if (!result.contains(brr.get(j))) {
+            result.add(brr.get(j));
+          }
           j++;
         }
       }
@@ -38,31 +40,29 @@ public class MissingNumber2 {
     }
   }
   public static void main(String[] args) throws IOException {
-    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+    MissingNumber2 missingNumber2 = new MissingNumber2();
+    Result resultInstance = missingNumber2.new Result();
 
-    int n = Integer.parseInt(bufferedReader.readLine().trim());
+    Scanner scanner = new Scanner(System.in);
 
-    List<Integer> arr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
-        .map(Integer::parseInt)
-        .collect(toList());
+    int sizeArr = scanner.nextInt();
+    List<Integer> arr = new ArrayList<>();
+    for (int i = 0; i < sizeArr; i++) {
+      arr.add(scanner.nextInt());
+    }
 
-    int m = Integer.parseInt(bufferedReader.readLine().trim());
+    int sizeBrr = scanner.nextInt();
+    List<Integer> brr = new ArrayList<>();
+    for (int i = 0; i < sizeBrr; i++) {
+      brr.add(scanner.nextInt());
+    }
 
-    List<Integer> brr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
-        .map(Integer::parseInt)
-        .collect(toList());
+    scanner.close();
 
-    List<Integer> result = Result.missingNumbers(arr, brr);
+    List<Integer> missingNumbers = resultInstance.missingNumbers(arr, brr);
 
-    bufferedWriter.write(
-        result.stream()
-            .map(Object::toString)
-            .collect(joining(" "))
-            + "\n"
-    );
-
-    bufferedReader.close();
-    bufferedWriter.close();
+    for (int i = 0; i < missingNumbers.size(); i++) {
+      System.out.print(missingNumbers.get(i) + " ");
+    }
   }
 }
