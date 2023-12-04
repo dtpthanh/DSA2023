@@ -1,50 +1,85 @@
-import java.util.Scanner;
-import java.util.Vector;
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
-class ConnectedCell {
-  public static int solve(int i, int j, int n, int m, Vector<Vector<Integer>> a) {
-    if (i < 0 || j < 0 || i >= n || j >= m || a.get(i).get(j) == 0) {
-      return 0;
+class Result {
+
+  /*
+   * Complete the 'connectedCell' function below.
+   *
+   * The function is expected to return an INTEGER.
+   * The function accepts 2D_INTEGER_ARRAY matrix as parameter.
+   */
+
+  public static int connectedCell(List<List<Integer>> matrix) {
+    // Write your code here
+    int max = 0;
+    for (int i = 0; i < matrix.size(); i++) {
+      for (int j = 0; j < matrix.size(); j++) {
+        max = Math.max(max, exploreRegion(matrix, i, j));
+      }
     }
-    a.get(i).set(j, 0);
-    int r, t, y, f, h, c, v, b;
-    r = solve(i - 1, j - 1, n, m, a);
-    t = solve(i - 1, j, n, m, a);
-    y = solve(i - 1, j + 1, n, m, a);
-    f = solve(i, j - 1, n, m, a);
-    h = solve(i, j + 1, n, m, a);
-    c = solve(i + 1, j - 1, n, m, a);
-    v = solve(i + 1, j, n, m, a);
-    b = solve(i + 1, j + 1, n, m, a);
-    return 1 + r + t + y + f + h + c + v + b;
+    return max;
   }
 
-  public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
-    int n = scanner.nextInt();
-    int m = scanner.nextInt();
-    Vector<Vector<Integer>> a = new Vector<>();
-
-    for (int i = 0; i < n; i++) {
-      Vector<Integer> temp = new Vector<>();
-      for (int j = 0; j < m; j++) {
-        int op = scanner.nextInt();
-        temp.add(op);
-      }
-      a.add(temp);
+  public static int exploreRegion(List<List<Integer>> matrix, int i, int j) {
+    if (i < 0 || j < 0 || i>= matrix.size() || j >= matrix.get(i).size()) {
+      return 0;
     }
-
-    int ans = 0;
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < m; j++) {
-        if (a.get(i).get(j) == 1) {
-          int d = 0;
-          d = solve(i, j, n, m, a);
-          ans = Math.max(ans, d);
-        }
-      }
+    if (matrix.get(i).get(j) == 1) {
+      int area = 1;
+      matrix.get(i).set(j, 0);
+      area += exploreRegion(matrix, i-1, j-1);
+      area += exploreRegion(matrix, i-1, j);
+      area += exploreRegion(matrix, i-1, j+1);
+      area += exploreRegion(matrix, i, j-1);
+      area += exploreRegion(matrix, i, j+1);
+      area += exploreRegion(matrix, i+1, j-1);
+      area += exploreRegion(matrix, i+1, j);
+      area += exploreRegion(matrix, i+1, j+1);
+      return area;
     }
+    return 0;
+  }
+}
 
-    System.out.println(ans);
+public class ConnectedCell {
+  public static void main(String[] args) throws IOException {
+    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+    int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+    int m = Integer.parseInt(bufferedReader.readLine().trim());
+
+    List<List<Integer>> matrix = new ArrayList<>();
+
+    IntStream.range(0, n).forEach(i -> {
+      try {
+        matrix.add(
+            Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+                .map(Integer::parseInt)
+                .collect(toList())
+        );
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
+      }
+    });
+
+    int result = Result.connectedCell(matrix);
+
+    bufferedWriter.write(String.valueOf(result));
+    bufferedWriter.newLine();
+
+    bufferedReader.close();
+    bufferedWriter.close();
   }
 }

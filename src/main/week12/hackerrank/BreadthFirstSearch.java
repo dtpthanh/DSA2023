@@ -10,8 +10,7 @@ import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-public class BreadthFirstSearch {
-  class Result {
+class Result {
 
   /*
    * Complete the 'bfs' function below.
@@ -26,41 +25,13 @@ public class BreadthFirstSearch {
 
   public static List<Integer> bfs(int n, int m, List<List<Integer>> edges, int s) {
     // Write your code here
-    List<Integer> dist = new ArrayList<>();
-    IntStream.range(0,n+1).forEach(x -> dist.add(-1));
-    int graph[][]= new int[n+1][n+1];
-    for(int i=0;i<m;i++){
-      int a = edges.get(i).get(0);
-      int b = edges.get(i).get(1);
-      graph[a][b]=6;
-      graph[b][a]=6;
-    }
-    boolean visited[]= new boolean[n+1];
-    visited[0]=true;
-    Queue<Integer> que = new LinkedList<>();
-    que.add(s);
-    visited[s]=true;
-    while (!que.isEmpty()){
-      int node = que.poll();
-      for(int i=0;i<n+1;i++){
-        if (!visited[i] && graph[node][i]!=0){
-          que.add(i);
-          visited[i]=true;
-          if (dist.get(node)==-1){
-            dist.set(i,graph[node][i]);
-          } else{
-            dist.set(i,dist.get(node)+graph[node][i]);
-          }
-        }
-      }
-    }
-    dist.remove(s);
-    dist.remove(0);
-    return dist;
+    int n = edges.size();
+    
   }
 
 }
 
+public class BreadthFirstSearch {
   public static void main(String[] args) throws IOException {
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
