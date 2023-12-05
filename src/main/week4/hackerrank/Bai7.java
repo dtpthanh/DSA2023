@@ -1,3 +1,4 @@
+package main.week4.hackerrank;
 import java.io.*;
 import java.math.*;
 import java.security.*;
@@ -10,7 +11,8 @@ import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-class SinglyLinkedListNode {
+public class Bai7 {
+  class SinglyLinkedListNode {
   public int data;
   public SinglyLinkedListNode next;
 
@@ -20,44 +22,41 @@ class SinglyLinkedListNode {
   }
 }
 
-class SinglyLinkedList {
-  public SinglyLinkedListNode head;
-  public SinglyLinkedListNode tail;
+  class SinglyLinkedList {
+    public SinglyLinkedListNode head;
+    public SinglyLinkedListNode tail;
 
-  public SinglyLinkedList() {
-    this.head = null;
-    this.tail = null;
-  }
-
-  public void insertNode(int nodeData) {
-    SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
-
-    if (this.head == null) {
-      this.head = node;
-    } else {
-      this.tail.next = node;
+    public SinglyLinkedList() {
+      this.head = null;
+      this.tail = null;
     }
 
-    this.tail = node;
+    public void insertNode(int nodeData) {
+      SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
+
+      if (this.head == null) {
+        this.head = node;
+      } else {
+        this.tail.next = node;
+      }
+
+      this.tail = node;
+    }
   }
-}
 
-class SinglyLinkedListPrintHelper {
-  public static void printList(SinglyLinkedListNode node, String sep, BufferedWriter bufferedWriter) throws IOException {
-    while (node != null) {
-      bufferedWriter.write(String.valueOf(node.data));
+  class SinglyLinkedListPrintHelper {
+    public static void printList(SinglyLinkedListNode node, String sep, BufferedWriter bufferedWriter) throws IOException {
+      while (node != null) {
+        bufferedWriter.write(String.valueOf(node.data));
 
-      node = node.next;
+        node = node.next;
 
-      if (node != null) {
-        bufferedWriter.write(sep);
+        if (node != null) {
+          bufferedWriter.write(sep);
+        }
       }
     }
   }
-}
-
-
-public class Bai7 {
   class Result {
 
     /*

@@ -2,7 +2,7 @@ package main.week2.exercise;
 
 import edu.princeton.cs.algs4.*;
 
-public class Sum {
+public class Sum2 {
     public static void main(String[] args) {
         In in = new In("D:\\GiangDay\\2324I\\CTDLGT\\algs4-data\\algs4-data\\4Kints.txt"); // tạo luồng đọc từ file
         int[] a = in.readAllInts();  // đọc toàn bộ file vào mảng a

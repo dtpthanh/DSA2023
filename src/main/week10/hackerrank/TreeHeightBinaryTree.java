@@ -1,7 +1,6 @@
-import java.io.*;
 import java.util.*;
 
-public class BinaryTree {
+public class TreeHeightBinaryTree {
 
   static class Node {
     Node left;

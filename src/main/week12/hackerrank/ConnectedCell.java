@@ -1,3 +1,5 @@
+package main.week12.hackerrank;
+
 import java.io.*;
 import java.math.*;
 import java.security.*;
@@ -10,7 +12,10 @@ import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-class Result {
+
+
+public class ConnectedCell {
+  class Result {
 
   /*
    * Complete the 'connectedCell' function below.
@@ -50,8 +55,6 @@ class Result {
     return 0;
   }
 }
-
-public class ConnectedCell {
   public static void main(String[] args) throws IOException {
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));

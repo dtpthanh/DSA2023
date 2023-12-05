@@ -1,3 +1,5 @@
+package main.week13.hackerrank;
+
 import java.util.*;
 
 public class Dijkstra {

@@ -1,3 +1,5 @@
+package main.week12.hackerrank;
+
 import java.io.*;
 import java.math.*;
 import java.security.*;
